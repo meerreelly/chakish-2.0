@@ -1,0 +1,97 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\chakish_2.0.bundle.scp.css",
+      "PackagePath": "staticwebassets\\chakish_2.0.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\HDN_3624.jpg",
+      "PackagePath": "staticwebassets\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\HDN_3624.jpg"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\photo_5461131821619209897_y.jpg",
+      "PackagePath": "staticwebassets\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\photo_5461131821619209897_y.jpg"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\photo_5461131821619209898_y.jpg",
+      "PackagePath": "staticwebassets\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\photo_5461131821619209898_y.jpg"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\photo_5461131821619209908_y.jpg",
+      "PackagePath": "staticwebassets\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\photo_5461131821619209908_y.jpg"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\Без названия.jfif",
+      "PackagePath": "staticwebassets\\avatars\\89a1098d-ccd3-4605-a330-1761cad4d7ef\\Без названия.jfif"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\avatars\\98aaf6a1-ca7c-4251-b9a0-4b49332bf498\\ava.png",
+      "PackagePath": "staticwebassets\\avatars\\98aaf6a1-ca7c-4251-b9a0-4b49332bf498\\ava.png"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\avatars\\f3c62884-5898-4356-8528-7ab7947003a0\\photo_5461131821619209900_y.jpg",
+      "PackagePath": "staticwebassets\\avatars\\f3c62884-5898-4356-8528-7ab7947003a0\\photo_5461131821619209900_y.jpg"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\avatars\\f3c62884-5898-4356-8528-7ab7947003a0\\photo_5461131821619209902_y.jpg",
+      "PackagePath": "staticwebassets\\avatars\\f3c62884-5898-4356-8528-7ab7947003a0\\photo_5461131821619209902_y.jpg"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\css\\chat.css",
+      "PackagePath": "staticwebassets\\css\\chat.css"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\css\\indexnew.css",
+      "PackagePath": "staticwebassets\\css\\indexnew.css"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\css\\userinfo.css",
+      "PackagePath": "staticwebassets\\css\\userinfo.css"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\js\\LoginPage.js",
+      "PackagePath": "staticwebassets\\js\\LoginPage.js"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\photos\\user-avatar.svg.png",
+      "PackagePath": "staticwebassets\\photos\\user-avatar.svg.png"
+    },
+    {
+      "Id": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0\\wwwroot\\sccs\\chatstyle.scss",
+      "PackagePath": "staticwebassets\\sccs\\chatstyle.scss"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.chakish_2.0.props",
+      "PackagePath": "build\\chakish_2.0.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.chakish_2.0.props",
+      "PackagePath": "buildMultiTargeting\\chakish_2.0.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.chakish_2.0.props",
+      "PackagePath": "buildTransitive\\chakish_2.0.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.chakish_2.0.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

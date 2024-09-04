@@ -1,0 +1,116 @@
+﻿@page "/userinfo"
+@using System.Net
+@using System.Net.Http.Headers
+@using chakish_2._0.Classes
+@using chakish_2._0.models
+@using Microsoft.AspNetCore.Http.HttpResults
+@using Microsoft.IdentityModel.Tokens
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@rendermode InteractiveServer
+@inject IFileUploadService FileUploadService
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link href="css/userinfo.css" rel="stylesheet" />
+<div>
+    <ul class="nav-links">
+        <li><a href="#">Chakish 2.0</a></li>
+        <li class="forward" ><a href="chat" >@_userData?.Name</a></li>
+    </ul>
+</div>
+
+@if (_userData != null)
+{
+    <div class="main">
+        <p> <img src="@( _userData.AvatarUrl ?? "http://localhost:5095/photos/user-avatar.svg.png")" alt="Avatar"  /></p>
+        <p><strong>Name:</strong> @_userData.Name</p>
+        <p><strong>Email:</strong> @_userData.Email</p>
+        <p><strong>Role:</strong> @_userData.Role</p>
+        <button type="button" @onclick="LogOut" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-log-out"></span> Log out
+        </button>
+        <div class="change_photo">
+            <InputFile OnChange="_Photo"  class="btn btn-default btn-sm"/>
+            <button type="button"  class="btn btn-default btn-sm" @onclick="SetPhoto">Set Photo</button>
+        </div>
+    </div>
+}
+else
+{
+    <p>Loading user information...</p>
+}
+
+@code {
+    private UserModel _userData;
+    private InputFileChangeEventArgs? _photo;
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var token = await localStorage.GetItemAsync<string>("authToken");
+            if (!string.IsNullOrEmpty(token))
+            {
+                try
+                {
+                    Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var response = await Http.GetFromJsonAsync<UserModel>("http://localhost:5139/user-info");
+                    if (response != null)
+                    {
+                        _userData = response;
+                        StateHasChanged();
+                    }
+                }
+                catch
+                {
+                    Navigation.NavigateTo("/Error");
+                }
+            }
+            else
+            {
+                Navigation.NavigateTo("/");
+            }
+        }
+    }
+
+    private void _Photo(InputFileChangeEventArgs e)
+    {
+        _photo = e;
+    }
+
+    private async Task SetPhoto()
+    {
+        var file = _photo?.File;
+        if (file != null)
+        {
+         
+            var path = await FileUploadService.UploadAsync(file, _userData.Id);
+            if (!path.IsNullOrEmpty())
+            {
+                try
+                {
+                    var token = await localStorage.GetItemAsync<string>("authToken");
+                    Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var response = await Http.PostAsJsonAsync("http://localhost:5139/set-avatar", path);
+                    if (response.IsSuccessStatusCode)
+                    _userData = await response.Content.ReadFromJsonAsync<UserModel>();
+                    
+                    StateHasChanged();
+                    
+                }
+                catch
+                {
+                    Navigation.NavigateTo("/Error");
+                }
+            }
+            
+            
+        }
+    }
+    private async Task LogOut()
+    {
+        await localStorage.RemoveItemAsync("authToken");
+        Navigation.NavigateTo("/");
+    }
+}

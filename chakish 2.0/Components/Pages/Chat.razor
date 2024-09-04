@@ -1,0 +1,240 @@
+﻿@page "/chat"
+@using System.Net.Http.Headers
+@using chakish_2._0.models
+@using Microsoft.AspNetCore.Http.HttpResults
+@using Microsoft.IdentityModel.Tokens
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@rendermode InteractiveServer
+
+<link  rel="stylesheet" href="css/chat.css" />
+
+
+<script src="https://kit.fontawesome.com/391827d54c.js" crossorigin="anonymous"></script>
+<div class="main-container">
+    <div class="left-container">
+        <!--header -->
+        <div class="header">
+            <div class="user-img" @onclick="RedirectToUserInfo" >
+                <img class="dp" src="@(_user?.AvatarUrl ?? "http://localhost:5095/photos/user-avatar.svg.png")" alt="">
+            </div>
+            <div class="nav-icons">
+            </div>
+        </div>
+
+        
+
+        <!--search-container -->
+        <div class="search-container">
+            <div class="input">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input @bind="_searchTag" @oninput="@(e => FindUser(e.Value.ToString()))" type="text" placeholder="Search or start new chat   "></div>
+            <i class="fa-sharp fa-solid fa-bars-filter"></i>
+        </div>
+
+
+        <!--chats -->
+        <div class="chat-list">
+            @if (_searchResult.Count==0)
+            {
+                @foreach (var chat in _chats)
+                {
+                    <div class="chat-box" @onclick="() => OpenChat(chat.ChatId)">
+                        <div class="img-box">
+                            <img class="dp" src="@(chat.Users.FirstOrDefault(user=>user.Id!=_user.Id)?.AvatarUrl ?? "http://localhost:5095/photos/user-avatar.svg.png")" alt="">
+                        </div>
+                        <div class="chat-details">
+                            <div class="text-head">
+                                <h4>@chat.Users.FirstOrDefault(user => user.Id!=_user.Id)?.Name</h4>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                @foreach (var user in _searchResult)
+                {
+                    <div class="chat-box" @onclick="() => CreateChat(user.Id)" >
+                        <div class="img-box">
+                            <img class="dp" src="@(user.AvatarUrl ??"http://localhost:5095/photos/user-avatar.svg.png")" alt="">
+                        </div>
+                        <div class="chat-details">
+                            <div class="text-head">
+                                <h4>@user.Name</h4>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            
+            
+        </div>
+
+    </div>
+    
+    @if (_activeChat != null && _user != null)
+    {
+        <div class="right-container" id="chat-right">
+        <!--header -->
+        <div class="header">
+            <div class="img-text">
+                <div class="user-img">
+                    <img class="dp" src="@(_activeChat.Users.FirstOrDefault(user=>user.Id!=_user.Id)?.AvatarUrl ?? "http://localhost:5095/photos/user-avatar.svg.png")" alt="">
+                </div>
+                <h4>@_activeChat.Users.FirstOrDefault(u=>u.Id != _user.Id)?.Name</h4>
+            </div>
+            <div class="nav-icons">
+                <li><i class="fa-solid fa-magnifying-glass"></i></li>
+                <li><i class="fa-solid fa-ellipsis-vertical"></i></li>
+            </div>
+        </div>
+
+        <!--chat-container -->
+        <div class="chat-container">
+        </div>
+
+        <!--input-bottom -->
+        <div class="chatbox-input">
+            <i class="fa-regular fa-face-grin"></i>
+            <i class="fa-sharp fa-solid fa-paperclip"></i>
+            <input type="text" placeholder="Type a message">
+        </div>
+    </div>
+    }
+    else
+    {
+        <div class="right-container" id="empty-right"></div>
+    }
+</div>
+    
+
+
+
+
+@code
+{
+    private string? _searchTag;
+    private UserModel? _user = null;
+    private List<UserModel> _searchResult = [];
+    private List<ChatModel> _chats = [];
+    private ChatModel? _activeChat = null;
+
+    private async Task FindUser(string SearchTag)
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrEmpty(token)&&!SearchTag.IsNullOrEmpty())
+        {
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            try
+            {
+                var encodedSearchTag = Uri.EscapeDataString(SearchTag);
+                var response = await Http.GetFromJsonAsync<List<UserModel>>($"http://localhost:5139/find-user?serachTag={encodedSearchTag}");
+                if (response != null && response.Any())
+                {
+                    _searchResult = response;
+                    StateHasChanged(); 
+                }
+                else
+                {
+                    _searchResult = new List<UserModel>();
+                    StateHasChanged(); 
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error occurred: {ex.Message}");
+            }
+        }
+        else
+        {
+            _searchResult = new List<UserModel>();
+            StateHasChanged(); 
+        }
+    }
+
+    private void RedirectToUserInfo()
+    {
+        Navigation.NavigateTo("/userinfo");
+    }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var token = await localStorage.GetItemAsync<string>("authToken");
+            if (!string.IsNullOrEmpty(token))
+            {
+                try
+                {
+                    Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var response = await Http.GetFromJsonAsync<UserModel>("http://localhost:5139/user-info");
+                    if (response != null)
+                    {
+                        _user = response;
+                        await GetChatList();
+                        StateHasChanged(); 
+                    }
+                }
+                catch
+                {
+                    Navigation.NavigateTo("/Error");
+                }
+            }
+            else
+            {
+                Navigation.NavigateTo("/");
+            }
+        }
+    }
+
+    private async Task CreateChat(Guid userId)
+    {
+        var encodedSearchTag = Uri.EscapeDataString(userId.ToString());
+        try
+        {
+            var response = await Http.GetFromJsonAsync<ChatModel>($"http://localhost:5139/get-chat?userId={encodedSearchTag}");
+            if (response != null) _activeChat = response;
+            await GetChatList();
+            StateHasChanged();
+
+        }
+        catch
+        {
+            Console.WriteLine("error");
+        }
+    }
+
+    private async Task GetChatList()
+    {
+        try
+        {
+            var chats = await Http.GetFromJsonAsync<List<ChatModel>>("http://localhost:5139/get-chat-list");
+            if (chats != null)
+            {
+                _chats = chats;
+            }
+        }
+        catch
+        {
+            _chats = [];
+        }
+    }
+
+    private async Task OpenChat(Guid chatId)
+    {
+        var encodedChatId = Uri.EscapeDataString(chatId.ToString());
+        try
+        {
+            var response = await Http.GetFromJsonAsync<ChatModel>($"http://localhost:5139/get-chat?chatId={encodedChatId}");
+            if (response != null) _activeChat = response;
+            StateHasChanged();
+
+        }
+        catch
+        {
+            Console.WriteLine("error");
+        }
+    }
+}

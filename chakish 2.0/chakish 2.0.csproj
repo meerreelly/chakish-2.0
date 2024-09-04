@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>chakish 2.0</RootNamespace>
+        <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.8" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\avatars\89a1098d-ccd3-4605-a330-1761cad4d7ef\" />
+      <Folder Include="wwwroot\avatars\98aaf6a1-ca7c-4251-b9a0-4b49332bf498\" />
+    </ItemGroup>
+
+</Project>

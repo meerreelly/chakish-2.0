@@ -1,0 +1,41 @@
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\appsettings.json
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\chakish_2.0.staticwebassets.runtime.json
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\chakish_2.0.exe
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\chakish_2.0.deps.json
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\chakish_2.0.runtimeconfig.json
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\chakish_2.0.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\chakish_2.0.pdb
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish 2.0.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish 2.0.AssemblyInfoInputs.cache
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish 2.0.AssemblyInfo.cs
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish 2.0.csproj.CoreCompileInputs.cache
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish_2.0.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\staticwebassets\msbuild.chakish_2.0.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\staticwebassets\msbuild.build.chakish_2.0.props
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.chakish_2.0.props
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.chakish_2.0.props
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\scopedcss\bundle\chakish_2.0.styles.css
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\scopedcss\projectbundle\chakish_2.0.bundle.scp.css
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish_2.0.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\refint\chakish_2.0.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish_2.0.pdb
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish 2.0.genruntimeconfig.cache
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\ref\chakish_2.0.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Blazored.LocalStorage.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish 2.0.csproj.AssemblyReference.cache
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish .0EB1D684.Up2Date
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\System.Security.Permissions.dll

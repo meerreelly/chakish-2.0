@@ -1,0 +1,35 @@
+﻿@page "/UserData"
+@using chakish_2._0.Classes
+@using chakish_2._0.models
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@rendermode InteractiveServer
+@inject IFileUploadService FileUploadService
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link href="css/userinfo.css" rel="stylesheet" />
+<div>
+    <ul class="nav-links">
+        <li><a href="#">Chakish 2.0</a></li>
+        <li class="forward" ><a href="chat" >@_userData?.Name</a></li>
+    </ul>
+</div>
+
+@if (_userData != null)
+{
+<div class="main">
+    <p> <img src="@( _userData.AvatarUrl=="test"? "http://localhost:5095/photos/user-avatar.svg.png":_userData.AvatarUrl)" alt="Avatar"  /></p>
+    <p><strong>Name:</strong> @_userData.Name</p>
+    <p><strong>Role:</strong> @_userData.Role</p>
+</div>
+}
+else
+{
+<p>Loading user information...</p>
+}
+
+@code {
+    private UserModel _userData;
+    
+}

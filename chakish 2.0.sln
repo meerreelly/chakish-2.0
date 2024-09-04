@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chakish 2.0", "chakish 2.0\chakish 2.0.csproj", "{AFAF9149-C7DF-4CD9-AEE5-0B9261E39B54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chakish 2.0 api", "chakish 2.0 api\chakish 2.0 api.csproj", "{0B565FC0-D1C5-4DEB-BDC7-15015A6D7332}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFAF9149-C7DF-4CD9-AEE5-0B9261E39B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFAF9149-C7DF-4CD9-AEE5-0B9261E39B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFAF9149-C7DF-4CD9-AEE5-0B9261E39B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFAF9149-C7DF-4CD9-AEE5-0B9261E39B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B565FC0-D1C5-4DEB-BDC7-15015A6D7332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B565FC0-D1C5-4DEB-BDC7-15015A6D7332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B565FC0-D1C5-4DEB-BDC7-15015A6D7332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B565FC0-D1C5-4DEB-BDC7-15015A6D7332}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

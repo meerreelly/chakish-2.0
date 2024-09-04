@@ -1,0 +1,57 @@
+﻿@page "/"
+@using System.Net.Http.Headers
+@using chakish_2._0.models
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@rendermode InteractiveServer
+
+<link href="css/indexnew.css" rel="stylesheet" />
+
+<ul class="nav-links">
+    <li><a>Chakish 2.0</a></li>
+    @if (isAuthenticated)
+    {
+        <li class="forward" ><a href="chat">@_userData?.Name</a></li>
+    }
+    else
+    {
+        <li class="forward"><a href="http://localhost:5139/login-google">Login</a></li>
+    }
+</ul>
+
+@code {
+    private bool isAuthenticated;
+    private UserModel _userData = null;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        isAuthenticated = !string.IsNullOrEmpty(token);
+        if (isAuthenticated && _userData == null)
+        {
+            await FetchUserInfo(token);
+        }
+    }
+
+    private async Task FetchUserInfo(string token)
+    {
+        if (!string.IsNullOrEmpty(token))
+        {
+            try
+            {
+                Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var response = await Http.GetFromJsonAsync<UserModel>("http://localhost:5139/user-info");
+                if (response != null)
+                {
+                    _userData = response;
+                    StateHasChanged();
+                }
+            }
+            catch
+            {
+                Navigation.NavigateTo("/Error");
+            }
+        }
+    }
+}
