@@ -23,6 +23,15 @@
 @code {
     private bool isAuthenticated;
     private UserModel _userData = null;
+    private string ApiUrl;
+
+    [Inject]
+    private IConfiguration Configuration { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ApiUrl = Configuration["Api:URL"];
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -33,7 +42,7 @@
             await FetchUserInfo(token);
         }
     }
-
+    
     private async Task FetchUserInfo(string token)
     {
         if (!string.IsNullOrEmpty(token))
@@ -41,7 +50,7 @@
             try
             {
                 Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                var response = await Http.GetFromJsonAsync<UserModel>("http://localhost:5139/user-info");
+                var response = await Http.GetFromJsonAsync<UserModel>($"{ApiUrl}user-info");
                 if (response != null)
                 {
                     _userData = response;

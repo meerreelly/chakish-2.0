@@ -9,120 +9,88 @@
 @rendermode InteractiveServer
 
 <link  rel="stylesheet" href="css/chat.css" />
-
-
-<script src="https://kit.fontawesome.com/391827d54c.js" crossorigin="anonymous"></script>
-<div class="main-container">
-    <div class="left-container">
-        <!--header -->
-        <div class="header">
-            <div class="user-img" @onclick="RedirectToUserInfo" >
-                <img class="dp" src="@(_user?.AvatarUrl ?? "http://localhost:5095/photos/user-avatar.svg.png")" alt="">
-            </div>
-            <div class="nav-icons">
-            </div>
-        </div>
-
-        
-
-        <!--search-container -->
-        <div class="search-container">
-            <div class="input">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input @bind="_searchTag" @oninput="@(e => FindUser(e.Value.ToString()))" type="text" placeholder="Search or start new chat   "></div>
-            <i class="fa-sharp fa-solid fa-bars-filter"></i>
-        </div>
-
-
-        <!--chats -->
-        <div class="chat-list">
-            @if (_searchResult.Count==0)
-            {
-                @foreach (var chat in _chats)
-                {
-                    <div class="chat-box" @onclick="() => OpenChat(chat.ChatId)">
-                        <div class="img-box">
-                            <img class="dp" src="@(chat.Users.FirstOrDefault(user=>user.Id!=_user.Id)?.AvatarUrl ?? "http://localhost:5095/photos/user-avatar.svg.png")" alt="">
-                        </div>
-                        <div class="chat-details">
-                            <div class="text-head">
-                                <h4>@chat.Users.FirstOrDefault(user => user.Id!=_user.Id)?.Name</h4>
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                @foreach (var user in _searchResult)
-                {
-                    <div class="chat-box" @onclick="() => CreateChat(user.Id)" >
-                        <div class="img-box">
-                            <img class="dp" src="@(user.AvatarUrl ??"http://localhost:5095/photos/user-avatar.svg.png")" alt="">
-                        </div>
-                        <div class="chat-details">
-                            <div class="text-head">
-                                <h4>@user.Name</h4>
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            
-            
-        </div>
-
-    </div>
-    
-    @if (_activeChat != null && _user != null)
-    {
-        <div class="right-container" id="chat-right">
-        <!--header -->
-        <div class="header">
-            <div class="img-text">
-                <div class="user-img">
-                    <img class="dp" src="@(_activeChat.Users.FirstOrDefault(user=>user.Id!=_user.Id)?.AvatarUrl ?? "http://localhost:5095/photos/user-avatar.svg.png")" alt="">
+@if (_user != null)
+{
+    <div class="chat-container">
+        <div class="chat-sidebar">
+            <h1 class="logo" @onclick="RedirectToUserInfo">Chakish</h1>
+            <div class="search-container">
+                <div class="input">
+                    <input @bind="_searchTag" @oninput="@(e => FindUser(e.Value.ToString()))" type="text" placeholder="Search or start new chat">
                 </div>
-                <h4>@_activeChat.Users.FirstOrDefault(u=>u.Id != _user.Id)?.Name</h4>
             </div>
-            <div class="nav-icons">
-                <li><i class="fa-solid fa-magnifying-glass"></i></li>
-                <li><i class="fa-solid fa-ellipsis-vertical"></i></li>
+            
+            <div class="contact-list">
+                @if (_chats is not null)
+                {
+                    @foreach (var chat in _chats)
+                    {
+                        <div class="contact-item" @onclick="() => OpenChat(chat.ChatId)">
+                            <img src="@chat.Users.FirstOrDefault(u => u.Id != _user.Id)?.AvatarUrl"/>
+                            <span>@chat.Users.FirstOrDefault(u => u.Id != _user.Id)?.Name</span>
+                        </div>
+                    }
+                }
+                else if(_searchResult is not null)
+                {
+                    @foreach (var user in _searchResult)
+                    {
+                        <div class="contact-item" @onclick="() => CreateChat(user.Id)">
+                            <img src="@user?.AvatarUrl"/>
+                            <span>@user?.Name</span>
+                        </div>
+                    }
+                }
             </div>
         </div>
-
-        <!--chat-container -->
-        <div class="chat-container">
-        </div>
-
-        <!--input-bottom -->
-        <div class="chatbox-input">
-            <i class="fa-regular fa-face-grin"></i>
-            <i class="fa-sharp fa-solid fa-paperclip"></i>
-            <input type="text" placeholder="Type a message">
-        </div>
+        @if (_activeChat != null)
+        {
+            <div class="chat-main">
+                <div class="chat-header">
+                    <img src="@UserChatWith?.AvatarUrl"/>
+                    <h2>@UserChatWith.Name</h2>
+                </div>
+                <div class="message-list" @ref="messageList">
+                </div>
+                <div class="message-input">
+                    <input  placeholder="Type a message..." />
+                    <button >Send</button>
+                </div>
+            </div>
+        }
     </div>
-    }
-    else
-    {
-        <div class="right-container" id="empty-right"></div>
-    }
-</div>
-    
-
-
-
+}
 
 @code
 {
+    
+    /*@foreach (var message in messages)
+            {
+            <div class="message @(message.IsReceived ? "received" : "sent")">
+                <p>@message.Content</p>
+                <span class="timestamp">@message.Timestamp.ToString("HH:mm")</span>
+            </div>
+            }*/
     private string? _searchTag;
     private UserModel? _user = null;
-    private List<UserModel> _searchResult = [];
-    private List<ChatModel> _chats = [];
+    private List<UserModel>? _searchResult;
+    private List<ChatModel>? _chats;
     private ChatModel? _activeChat = null;
+    private UserModel? UserChatWith;
+    private ElementReference messageList;
+    private string ApiUrl;
+    
+    [Inject]
+    private IConfiguration Configuration { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ApiUrl = Configuration["Api:URL"];
+    }
 
     private async Task FindUser(string SearchTag)
     {
+        _chats = null;
         var token = await localStorage.GetItemAsync<string>("authToken");
         if (!string.IsNullOrEmpty(token)&&!SearchTag.IsNullOrEmpty())
         {
@@ -130,7 +98,7 @@
             try
             {
                 var encodedSearchTag = Uri.EscapeDataString(SearchTag);
-                var response = await Http.GetFromJsonAsync<List<UserModel>>($"http://localhost:5139/find-user?serachTag={encodedSearchTag}");
+                var response = await Http.GetFromJsonAsync<List<UserModel>>($"{ApiUrl}find-user?serachTag={encodedSearchTag}");
                 if (response != null && response.Any())
                 {
                     _searchResult = response;
@@ -144,12 +112,15 @@
             }
             catch (Exception ex)
             {
+                _searchResult = new List<UserModel>();
+                StateHasChanged(); 
                 Console.WriteLine($"Error occurred: {ex.Message}");
             }
         }
         else
         {
-            _searchResult = new List<UserModel>();
+            _searchResult = null;
+            await GetChatList();
             StateHasChanged(); 
         }
     }
@@ -169,7 +140,7 @@
                 try
                 {
                     Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                    var response = await Http.GetFromJsonAsync<UserModel>("http://localhost:5139/user-info");
+                    var response = await Http.GetFromJsonAsync<UserModel>($"{ApiUrl}user-info");
                     if (response != null)
                     {
                         _user = response;
@@ -194,8 +165,12 @@
         var encodedSearchTag = Uri.EscapeDataString(userId.ToString());
         try
         {
-            var response = await Http.GetFromJsonAsync<ChatModel>($"http://localhost:5139/get-chat?userId={encodedSearchTag}");
-            if (response != null) _activeChat = response;
+            var response = await Http.GetFromJsonAsync<ChatModel>($"{ApiUrl}get-chat?userId={encodedSearchTag}");
+            if (response != null)
+            {
+                _activeChat = response;
+                UserChatWith = _activeChat.Users.FirstOrDefault(u => u.Id != _user.Id);
+            }
             await GetChatList();
             StateHasChanged();
 
@@ -210,7 +185,7 @@
     {
         try
         {
-            var chats = await Http.GetFromJsonAsync<List<ChatModel>>("http://localhost:5139/get-chat-list");
+            var chats = await Http.GetFromJsonAsync<List<ChatModel>>($"{ApiUrl}get-chat-list");
             if (chats != null)
             {
                 _chats = chats;
@@ -227,8 +202,12 @@
         var encodedChatId = Uri.EscapeDataString(chatId.ToString());
         try
         {
-            var response = await Http.GetFromJsonAsync<ChatModel>($"http://localhost:5139/get-chat?chatId={encodedChatId}");
-            if (response != null) _activeChat = response;
+            var response = await Http.GetFromJsonAsync<ChatModel>($"{ApiUrl}get-chat?chatId={encodedChatId}");
+            if (response != null)
+            {
+                _activeChat = response;
+                UserChatWith = _activeChat.Users.FirstOrDefault(u => u.Id != _user.Id);
+            }
             StateHasChanged();
 
         }
@@ -236,5 +215,10 @@
         {
             Console.WriteLine("error");
         }
+    }
+
+    private void RedirectToUser()
+    {
+        Navigation.NavigateTo($"/UserData/{UserChatWith.Id}");
     }
 }

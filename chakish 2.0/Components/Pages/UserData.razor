@@ -1,4 +1,5 @@
-﻿@page "/UserData"
+﻿@page "/UserData/{userId}"
+@using System.Net.Http.Headers
 @using chakish_2._0.Classes
 @using chakish_2._0.models
 @inject HttpClient Http
@@ -30,6 +31,44 @@ else
 }
 
 @code {
-    private UserModel _userData;
+    private UserDto? _userData;
+    private string ApiUrl;
+    [Parameter]
+    public string userId { get; set; }
+
+    [Inject]
+    private IConfiguration Configuration { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ApiUrl = Configuration["Api:URL"];
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) await GetUserInfo();
+    }
     
+    private async Task GetUserInfo()
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrEmpty(token))
+        {
+            try
+            {
+                Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var response = await Http.GetFromJsonAsync<UserDto>($"{ApiUrl}get-user-info?userId={userId}");
+                if (response != null)
+                {
+                    _userData = response;
+                    StateHasChanged();
+                }
+            }
+            catch
+            {
+                Navigation.NavigateTo("/Error");
+            }
+        }
+    }
+
 }

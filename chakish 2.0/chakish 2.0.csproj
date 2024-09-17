@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Controllers\" />
       <Folder Include="wwwroot\avatars\89a1098d-ccd3-4605-a330-1761cad4d7ef\" />
       <Folder Include="wwwroot\avatars\98aaf6a1-ca7c-4251-b9a0-4b49332bf498\" />
     </ItemGroup>

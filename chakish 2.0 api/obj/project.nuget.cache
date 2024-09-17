@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1tVCUEepSp5ZZyMho7iIndvYPXxvuzfFCubDgFfVTLXVG5VYoUXCjybmPJjYj4uxQX1fKsmvch1lstxWWarhDg==",
+  "dgSpecHash": "Ux+N2CEWe2Uqd4Mr89uEl+7A4gheUSt1Ia6Qi6lqiDNt5tDkckRMJ0didTbd+bqnHBWBxB0BVQ/XChtRvjS37Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\merely\\RiderProjects\\chakish 2.0\\chakish 2.0 api\\chakish 2.0 api.csproj",
   "expectedPackageFiles": [
@@ -28,6 +28,7 @@
     "C:\\Users\\merely\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\7.1.2\\microsoft.identitymodel.protocols.openidconnect.7.1.2.nupkg.sha512",
     "C:\\Users\\merely\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.1.2\\microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
     "C:\\Users\\merely\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\merely\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.20.1\\microsoft.visualstudio.azure.containers.tools.targets.1.20.1.nupkg.sha512",
     "C:\\Users\\merely\\.nuget\\packages\\npgsql\\8.0.2\\npgsql.8.0.2.nupkg.sha512",
     "C:\\Users\\merely\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\9.0.0-preview.3\\npgsql.entityframeworkcore.postgresql.9.0.0-preview.3.nupkg.sha512",
     "C:\\Users\\merely\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",

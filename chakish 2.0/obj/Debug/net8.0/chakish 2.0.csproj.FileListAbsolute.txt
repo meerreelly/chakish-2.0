@@ -39,3 +39,4 @@ C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft
 C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\merely\RiderProjects\chakish 2.0\chakish 2.0\obj\Debug\net8.0\chakish 2.0.sourcelink.json

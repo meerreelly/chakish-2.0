@@ -1,0 +1,100 @@
+﻿@page "/TestChat"
+@inject IJSRuntime JSRuntime
+
+<div class="chat-container">
+    <div class="chat-sidebar">
+        <div class="logo">Chakish</div>
+        <div class="contact-list">
+            @foreach (var contact in contacts)
+            {
+            <div class="contact-item">
+                <img src="@contact.Avatar" alt="@contact.Name" />
+                <span>@contact.Name</span>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="chat-main">
+        <div class="chat-header">
+            <h2>Chat with @currentContact</h2>
+        </div>
+        <div class="message-list" @ref="messageList">
+            @foreach (var message in messages)
+            {
+            <div class="message @(message.IsReceived ? "received" : "sent")">
+                <p>@message.Content</p>
+                <span class="timestamp">@message.Timestamp.ToString("HH:mm")</span>
+            </div>
+            }
+        </div>
+        <div class="message-input">
+            <input @bind="newMessage" @onkeyup="HandleKeyPress" placeholder="Type a message..." />
+            <button @onclick="SendMessage">Send</button>
+        </div>
+    </div>
+</div>
+
+
+@code {
+private string currentContact = "John Doe";
+private string newMessage = "";
+private ElementReference messageList;
+
+private List<Contact> contacts = new List<Contact>
+{
+new Contact { Name = "John Doe", Avatar = "path/to/avatar1.jpg" },
+new Contact { Name = "Jane Smith", Avatar = "path/to/avatar2.jpg" },
+// Add more contacts as needed
+};
+
+private List<Message> messages = new List<Message>
+{
+new Message { Content = "Hi there!", IsReceived = true, Timestamp = DateTime.Now.AddMinutes(-5) },
+new Message { Content = "Hello! How are you?", IsReceived = false, Timestamp = DateTime.Now.AddMinutes(-4) },
+// Add more messages as needed
+};
+
+private async Task SendMessage()
+{
+if (!string.IsNullOrWhiteSpace(newMessage))
+{
+messages.Add(new Message { Content = newMessage, IsReceived = false, Timestamp = DateTime.Now });
+newMessage = "";
+await ScrollToBottom();
+}
+}
+
+private async Task HandleKeyPress(KeyboardEventArgs e)
+{
+if (e.Key == "Enter")
+{
+await SendMessage();
+}
+}
+
+private async Task ScrollToBottom()
+{
+await JSRuntime.InvokeVoidAsync("scrollToBottom", messageList);
+}
+
+protected override async Task OnAfterRenderAsync(bool firstRender)
+{
+if (firstRender)
+{
+await ScrollToBottom();
+}
+}
+
+public class Contact
+{
+public string Name { get; set; }
+public string Avatar { get; set; }
+}
+
+public class Message
+{
+public string Content { get; set; }
+public bool IsReceived { get; set; }
+public DateTime Timestamp { get; set; }
+}
+}

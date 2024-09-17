@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("chakish_2.0")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82e625080a18b60a376777a8f39577716cbef8c1")]
 [assembly: System.Reflection.AssemblyProductAttribute("chakish_2.0")]
 [assembly: System.Reflection.AssemblyTitleAttribute("chakish_2.0")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

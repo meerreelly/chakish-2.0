@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
-
+string Api = builder.Configuration["Api:URL"];
 // Configure authentication
 builder.Services.AddAuthentication(options =>
 {
